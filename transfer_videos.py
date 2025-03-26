@@ -68,37 +68,9 @@ bunny_headers = {
     "content-type": "application/json"
 }
 
-# bunny_videos = []
-# # Only process first video for testing
-# if video_downloads:
-#     video = video_downloads[0]
-#     # Create video object in Bunny.net
-#     create_response = requests.post(
-#         bunny_base_url,
-#         headers=bunny_headers,
-#         json={"title": video['name']}
-#     )
-    
-#     if create_response.status_code == 200:
-#         bunny_video = create_response.json()
-#         bunny_videos.append({
-#             'cf_uid': video['uid'],
-#             'bunny_id': bunny_video['guid'],
-#             'name': video['name'],
-#             'download_url': video['download_url']
-#         })
-#         print(f"✓ Created Bunny.net video object for: {video['name']}")
-#     else:
-#         print(f"✗ Failed to create Bunny.net video for {video['name']}: {create_response.status_code}")
-#         print(f"Error: {create_response.text}")
-
-# print(f"\nSuccessfully created {len(bunny_videos)} videos in Bunny.net")
-
-# # Step 3: Fetch video files from Cloudflare and upload to Bunny.net
-
-# Step 3: Fetch video files from Cloudflare and upload to Bunny.net
+# Step 2: Fetch video files from Cloudflare and upload to Bunny.net
 for video in video_downloads:
-    # Construct fetch URL for Bunny.net with video GUID
+    # Construct fetch URL for Bunny.net
     fetch_url = f"{bunny_base_url}/fetch"
     
     # Make fetch request to Bunny.net with Cloudflare download URL
