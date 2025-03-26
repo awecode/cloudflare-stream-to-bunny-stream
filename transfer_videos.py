@@ -1,7 +1,8 @@
-# Step 0: Initialize the environment
-from dotenv import load_dotenv
 import os
 import requests
+import json
+from dotenv import load_dotenv
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -66,6 +67,8 @@ bunny_headers = {
 }
 
 # Step 2: Fetch video files from Cloudflare and upload to Bunny.net
+cloudflare_to_bunny_map = {}
+
 for video in video_downloads:
     # Construct fetch URL for Bunny.net
     fetch_url = f"{bunny_base_url}/fetch"
@@ -78,6 +81,8 @@ for video in video_downloads:
     )
     
     if fetch_response.status_code == 200:
+        bunny_video_id = fetch_response.json()['id']
+        cloudflare_to_bunny_map[video['uid']] = bunny_video_id
         print(f"✓ Started fetch for video: {video['name']}")
     else:
         print(f"✗ Failed to fetch video {video['name']}: {fetch_response.status_code}")
@@ -85,3 +90,5 @@ for video in video_downloads:
 
 print("\nFinished initiating video fetches in Bunny.net")
 
+print("\nMapping:")
+print(json.dumps(cloudflare_to_bunny_map, indent=2))
