@@ -5,10 +5,6 @@ import requests
 # Load environment variables from .env file
 load_dotenv()
 
-# Print environment variables
-print("Cloudflare Account ID:", os.getenv('CF_ACCOUNT_ID'))
-print("Cloudflare API Token:", os.getenv('CF_API_TOKEN'))
-
 # Step 1: List all videos in Cloudflare Stream
 
 # Set up the API endpoint and headers
@@ -50,8 +46,4 @@ for video in videos:
     else:
         print(f"✗ Failed to enable downloads for {video_name}: {response.status_code}")
         print(f"Error: {response.text}")
-
-# Step 3: Download the video
-
-# Step 4: Upload the video to Bunny.net
 
