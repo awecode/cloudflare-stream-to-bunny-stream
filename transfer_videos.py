@@ -27,10 +27,7 @@ print(f"\nFound {len(videos)} videos")
 # Get download links for each video
 video_downloads = []
 for video in videos:
-    # Only process first video for testing
-    if videos.index(video) > 0:
-        break
-        
+       
     video_uid = video['uid']
     video_name = video.get('meta', {}).get('name', 'Untitled')
     
