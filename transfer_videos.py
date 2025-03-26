@@ -3,6 +3,9 @@ import requests
 import json
 from dotenv import load_dotenv
 
+# Leave empty to allow all cloudflare stream video ids
+ALLOWED_VIDEOS_IDS = []
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -30,6 +33,10 @@ video_downloads = []
 for video in videos:
        
     video_uid = video['uid']
+
+    if len(ALLOWED_VIDEOS_IDS) > 0 and video_uid not in ALLOWED_VIDEOS_IDS:
+        continue
+
     video_name = video.get('meta', {}).get('name', 'Untitled')
     
     # Get video download URL
